@@ -1,8 +1,10 @@
 package com.fernandoschimidt.help_desk.security;
 
+import com.fernandoschimidt.help_desk.role.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,9 +31,10 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers(
-                                        "/auth/**"
-                                ).permitAll()
+                        req
+                                .requestMatchers("/auth/**").permitAll()
+//                                .requestMatchers(HttpMethod.GET, "/api/user").hasRole("ADMIN")
+//                                .requestMatchers(HttpMethod.POST, "/api/user").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 )

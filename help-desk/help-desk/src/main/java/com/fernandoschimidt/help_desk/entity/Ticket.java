@@ -12,6 +12,7 @@ public class Ticket {
     private String title;
     private String description;
     private String status; // OPEN, IN_PROGRESS, CLOSED
+    private String priority;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
